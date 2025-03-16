@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カウントダウン</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212; /* 黒背景 */
+      color: #ffffff; /* 白文字 */
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .countdown {
+      font-size: 30px;
+      margin-top: 20px;
+    }
+    .countdown span {
+      font-size: 50px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>たわしが逮捕されるまでのカウントダウン</h1>
+  <div class="countdown">
+    <p>残り <span id="days"></span> 日 <span id="hours"></span> 時 <span id="minutes"></span> 分</p>
+  </div>
+
+  <audio id="bgm" autoplay loop>
+    <source src="https://cdn.aa-bot.jp/uploads/------------BGM-----------------------------------------------------------------------------8dup5dK2nmQ--1742113769037.mp3" type="audio/mpeg">
+    お使いのブラウザはaudioタグをサポートしていません。
+  </audio>
+
+  <script>
+    // 目標日付 (3月20日)
+    const targetDate = new Date('2025-03-20T00:00:00');
+
+    // カウントダウンを更新する関数
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = targetDate - now;
+
+      // 時間が残っている場合、日付、時間、分を計算
+      if (timeLeft > 0) {
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+      } else {
+        document.querySelector('.countdown p').textContent = 'カウントダウン終了';
+      }
+    }
+
+    // 1秒ごとにカウントダウンを更新
+    setInterval(updateCountdown, 1000);
+
+    // 最初のカウントダウン表示を更新
+    updateCountdown();
+  </script>
+</body>
+</html>
